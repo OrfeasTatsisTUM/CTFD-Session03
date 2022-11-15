@@ -20,3 +20,4 @@ set(gcf, 'Position',[630,150,550,550]);
 figure(3)
 surf(X,Y,T); hold on; surf(X,-Y,T)
 set(gcf, 'Position',[1200,150,550,550]);
+view(45,24);            %view angle

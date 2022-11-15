@@ -80,7 +80,7 @@ TD.east  = 10;
 % Thermal conductivity Coefficient 0.05(ice) - 400(pure copper) [W/(m*K)]
 % 1) homgenous      2) non_homogenous (region with different K)
 % 3) random         4) linear (changing through x)
-heat_conduc = 'linear';
+heat_conduc = 'homogenous';
 
 % Define the Heat conductivity coefficient values
 % for non_homogenous & linear cases it has been assumed that lamda changes on x axis

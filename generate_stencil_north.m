@@ -53,7 +53,7 @@ syms  T_E T_W T_S T_SW T_SE T_P real
 syms T_e T_w T_se T_sw T_eta T_etaE T_etaW T_sE T_s T_sW real
 
 % T_P in A.14
-syms bc_control alpha
+syms bc_control alpha lamda Tinf
 
 % Define inner Temperatures as interpolation of outer Temperatures (3.33 - 3.36)
 T_e   =(T_P  + T_E)/2;
@@ -80,7 +80,7 @@ dTdy_etaw =  -(dx_sW_s*T_sw + dx_s_P*T_eta + dx_P_W*T_w + dx_W_sW*T_etaW) /S_eta
 
 % Build whole stecil acounting for quadratic lamda like in Helmholtz (A.14)
 
- DDT= ((-bc_control*(dy_e_w-dx_e_w)*alpha*T_P...
+ DDT= ((-bc_control*(dy_e_w-dx_e_w)*alpha/lamda*(T_P)...
      + dy_se_e*dTdx_etae - dx_se_e*dTdy_etae...
      + dy_sw_se*dTdx_s   - dx_sw_se*dTdy_s...
      + dy_w_sw*dTdx_etaw - dx_w_sw*dTdy_etaw ) /S_eta)...
@@ -124,21 +124,21 @@ fileID2 = fopen(target_file, 'r+');
       
         fprintf(fileID2,'%% Stecil \n\n');
         fprintf(fileID2,'%% East \n');
-        fprintf(fileID2,'D3=%s; \n\n',char(stecil(1)));
+        fprintf(fileID2,'D3=%s; \n\n', replace(char(stecil(1)), 'lamda', 'lamda(i,j)'));
    
         fprintf(fileID2,'%% West \n');
-        fprintf(fileID2,'D_3=%s; \n\n',char(stecil(2)));
+        fprintf(fileID2,'D_3=%s; \n\n',replace(char(stecil(2)), 'lamda', 'lamda(i,j)'));
 
         fprintf(fileID2,'%% South \n');
-        fprintf(fileID2,'D1=%s; \n\n',char(stecil(3)));
+        fprintf(fileID2,'D1=%s; \n\n',replace(char(stecil(3)), 'lamda', 'lamda(i,j)'));
 
         fprintf(fileID2,'%% SW \n');
-        fprintf(fileID2,'D_2=%s; \n\n',char(stecil(4)));
+        fprintf(fileID2,'D_2=%s; \n\n',replace(char(stecil(4)), 'lamda', 'lamda(i,j)'));
 
         fprintf(fileID2,'%% SE \n');
-        fprintf(fileID2,'D4=%s; \n\n',char(stecil(5)));
+        fprintf(fileID2,'D4=%s; \n\n',replace(char(stecil(5)), 'lamda', 'lamda(i,j)'));
 
         fprintf(fileID2,'%% P \n');
-        fprintf(fileID2,'D0=%s; \n\n',char(stecil(6)));
+        fprintf(fileID2,'D0=%s; \n\n',replace(char(stecil(6)), 'lamda', 'lamda(i,j)'));
 
 fclose(fileID2);

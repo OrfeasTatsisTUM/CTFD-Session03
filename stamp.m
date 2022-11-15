@@ -38,7 +38,7 @@ elseif i == 1
 else
     nodePosition = 'inner Node';
 end
-
+% corner_check(i,j) = (i==1 || i==dimY) && (j==1 || j==dimX);
 
 % Calculate the equation for the correct node position
 switch nodePosition
@@ -155,7 +155,34 @@ switch nodePosition
     case 'East'
         if strcmp(boundary.east, 'Dirichlet')
             stencil(index(i, j))     = 1;
+        else
+            %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+            data_east
+            %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
+            bc_control = strcmp(boundary.east, 'Robin'); % factor that includes T_P in 3.16 (A.14)
+
+            %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
+            build_east
+            %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+            % P
+            stencil(index(i, j))     = lamda(i,j)      * D0;
+    
+            % North
+            stencil(index(i-1, j))   = lamda(i-1,j)    * D_1;
+    
+            % West
+            stencil(index(i, j-1))   = lamda(i,j-1)    * D_3;
+    
+            % South
+            stencil(index(i+1, j))   = lamda(i+1,j)    * D1;
+    
+            % SW
+            stencil(index(i+1, j-1)) = lamda(i+1, j-1) * D_2;
+    
+            % NW
+            stencil(index(i-1, j-1)) = lamda(i-1, j-1) * D_4;
         end
 
 %% West

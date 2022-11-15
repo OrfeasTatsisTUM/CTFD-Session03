@@ -53,7 +53,7 @@ syms  T_S T_W T_N T_NW T_SW T_P real
 syms T_n T_s T_sw T_nw T_omega T_Nomega T_Somega T_Nw T_w T_Sw real
 
 % T_P in A.14
-syms bc_control alpha
+syms bc_control alpha lamda Tinf
 
 % Define inner Temperatures as interpolation of outer Temperatures (3.33 - 3.36)
 T_n   =(T_P  + T_N)/2;
@@ -80,7 +80,7 @@ dTdy_nomega =   (dx_Nw_w*T_nw + dx_w_P*T_omega + dx_P_N*T_n + dx_N_Nw*T_Nomega) 
 
 % Build whole stecil acounting for quadratic lamda like in Helmholtz (A.14)
 
- DDT= ((-bc_control*(dy_s_n-dx_s_n)*alpha*T_P...
+ DDT= ((-bc_control*(dy_s_n-dx_s_n)*alpha/lamda*T_P...
      + dy_sw_s*dTdx_somega - dx_sw_s*dTdy_somega...
      + dy_nw_sw*dTdx_w   - dx_nw_sw*dTdy_w...
      + dy_n_nw*dTdx_nomega - dx_n_nw*dTdy_nomega ) /S_omega)...
@@ -125,26 +125,24 @@ fileID2 = fopen(target_file, 'r+');
         fprintf(fileID2,'%%    D_3 - D_0\n');
         fprintf(fileID2,'%%     |     | \n');
         fprintf(fileID2,'%%    D_2 -  D1\n\n');
-        
-        %fprintf(fileID2,'lambda=boundary.lambda; \n\n');
-      
+              
         fprintf(fileID2,'%% Stecil \n\n');
         fprintf(fileID2,'%% South \n');
-        fprintf(fileID2,'D1=%s; \n\n',char(stecil(1)));
+        fprintf(fileID2,'D1=%s; \n\n', replace(char(stecil(1)), 'lamda', 'lamda(i,j)'));
    
         fprintf(fileID2,'%% West \n');
-        fprintf(fileID2,'D_3=%s; \n\n',char(stecil(2)));
+        fprintf(fileID2,'D_3=%s; \n\n',replace(char(stecil(2)), 'lamda', 'lamda(i,j)'));
 
         fprintf(fileID2,'%% North \n');
-        fprintf(fileID2,'D_1=%s; \n\n',char(stecil(3)));
+        fprintf(fileID2,'D_1=%s; \n\n', replace(char(stecil(3)), 'lamda', 'lamda(i,j)'));
 
         fprintf(fileID2,'%% NW \n');
-        fprintf(fileID2,'D_4=%s; \n\n',char(stecil(4)));
+        fprintf(fileID2,'D_4=%s; \n\n',replace(char(stecil(4)), 'lamda', 'lamda(i,j)'));
 
         fprintf(fileID2,'%% SW \n');
-        fprintf(fileID2,'D_2=%s; \n\n',char(stecil(5)));
+        fprintf(fileID2,'D_2=%s; \n\n', replace(char(stecil(5)), 'lamda', 'lamda(i,j)'));
 
         fprintf(fileID2,'%% P \n');
-        fprintf(fileID2,'D0=%s; \n\n',char(stecil(6)));
+        fprintf(fileID2,'D0=%s; \n\n',replace(char(stecil(6)), 'lamda', 'lamda(i,j)'));
 
 fclose(fileID2);

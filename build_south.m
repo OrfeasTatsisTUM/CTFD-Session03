@@ -40,5 +40,5 @@ D_4=0*(~bc_control) + ((dx_nw_w*(dx_nW_W/4 + dx_n_nW/4))/S_etaw + (dy_nw_w*(dy_n
 D2=0*(~bc_control) + ((dx_e_ne*(dx_E_nE/4 + dx_nE_n/4))/S_etae + (dy_e_ne*(dy_E_nE/4 + dy_nE_n/4))/S_etae + (dx_e_Ne*dx_ne_nw)/(4*S_n) + (dy_e_Ne*dy_ne_nw)/(4*S_n))/(S_eta*(1*(~bc_control) - (bc_control*(dx_w_e - dy_w_e))/S_eta)); 
 
 % P 
-D0=0*(~bc_control) + ((dx_e_ne*(dx_P_E/2 + (3*dx_n_P)/4 + dx_nE_n/4))/S_etae + (dx_nw_w*(dx_W_P/2 + (3*dx_P_n)/4 + dx_n_nW/4))/S_etaw + (dy_e_ne*(dy_P_E/2 + (3*dy_n_P)/4 + dy_nE_n/4))/S_etae + (dy_nw_w*(dy_W_P/2 + (3*dy_P_n)/4 + dy_n_nW/4))/S_etaw + alpha*bc_control*(dx_w_e - dy_w_e) + (dx_ne_nw*(dx_w_e + dx_e_Ne/4 + dx_Nw_w/4))/S_n + (dy_ne_nw*(dy_w_e + dy_e_Ne/4 + dy_Nw_w/4))/S_n)/(S_eta*(1*(~bc_control) - (bc_control*(dx_w_e - dy_w_e))/S_eta)); 
+D0=0*(~bc_control) + ((dx_e_ne*(dx_P_E/2 + (3*dx_n_P)/4 + dx_nE_n/4))/S_etae + (dx_nw_w*(dx_W_P/2 + (3*dx_P_n)/4 + dx_n_nW/4))/S_etaw + (dy_e_ne*(dy_P_E/2 + (3*dy_n_P)/4 + dy_nE_n/4))/S_etae + (dy_nw_w*(dy_W_P/2 + (3*dy_P_n)/4 + dy_n_nW/4))/S_etaw + (dx_ne_nw*(dx_w_e + dx_e_Ne/4 + dx_Nw_w/4))/S_n + (dy_ne_nw*(dy_w_e + dy_e_Ne/4 + dy_Nw_w/4))/S_n + (alpha*bc_control*(dx_w_e - dy_w_e))/lamda(i,j))/(S_eta*(1*(~bc_control) - (bc_control*(dx_w_e - dy_w_e))/S_eta)); 
 

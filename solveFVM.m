@@ -41,7 +41,7 @@ if strcmp(boundary.north, 'Dirichlet')
     end
 elseif strcmp(boundary.north, 'Robin')
     for i = 1:dimX
-        B(index(1,i)) = -alpha* Tinf;
+        B(index(1,i)) = -alpha/lamda(1,i) * Tinf;
     end
 end
 
@@ -56,7 +56,7 @@ if strcmp(boundary.south, 'Dirichlet')
     end
 elseif strcmp(boundary.south, 'Robin')
     for i = 1:dimX
-        B(index(dimY,i)) = -alpha* Tinf;
+        B(index(dimY,i)) = -alpha/lamda(dimY,i) * Tinf;
     end
 end
 
@@ -69,6 +69,10 @@ if strcmp(boundary.east, 'Dirichlet')
 %             B(index(i,dimX)) = B(index(i,dimX)) + TD.east/2;
 %         end
     end
+elseif strcmp(boundary.east, 'Robin')
+    for i = 1:dimX
+        B(index(i,dimX)) = -alpha/lamda(i,dimX) * Tinf;
+    end
 end
 
 % West
@@ -79,6 +83,10 @@ if strcmp(boundary.west, 'Dirichlet')
 %         else
 %             B(index(i,1)) = B(index(i,1)) + TD.west/2;
 %         end
+    end
+elseif strcmp(boundary.west, 'Robin')
+    for i = 1:dimX
+        B(index(i,1)) = -alpha/lamda(i,1) * Tinf;
     end
 end
 

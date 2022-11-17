@@ -11,15 +11,12 @@ clear; close all; clc;
 
 
 %% Initialize variables
-
 InitFVM
 
 %% Set up the mesh
-
 [X, Y] = setUpMesh(dimY, dimX, l, formfunction);
 
 %% Fill matrix A and vector B. Solve the linear system.
-
 T = solveFVM(dimY, dimX, X, Y, boundary, TD, lamda, alpha, Tinf);
 
 %% Make some plots

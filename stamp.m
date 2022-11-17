@@ -122,6 +122,7 @@ switch nodePosition
         if strcmp(boundary.north, 'Dirichlet')
             stencil(index(i, j))     = 1;
         else
+            
             %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             data_north
             %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -191,4 +192,3 @@ switch nodePosition
             stencil(index(i, j))     = 1;
         end
 end
-

@@ -22,10 +22,10 @@
 
 shape = 'linear';  % 'linear' or 'quadratic'
 
-h1 = 4;
+h1 = 10;
 hm = 4;            % only necessary for quatratic option 
-h2 = 2;
-l = 5;
+h2 = 3;
+l  = 10;
 
 % Number of degrees of freedom (number of nodes per length)
 dimX = 35;
@@ -59,21 +59,21 @@ switch shape
 end
 
 %% Parameter for Conjugated Heat Transfer (For Session 04)
-alpha = 2;
+alpha = 5;
 Tinf = 90;
 
 %% Boundary conditions (Only Dirichlet applied in Session 03) 
 % Type: 1) Dirichlet    2) Neumann    3) Robin
 boundary.south = 'Neumann';
-boundary.north = 'Robin';
-boundary.east  = 'Dirichlet';
+boundary.north = 'Dirichlet';
+boundary.east  = 'Neumann';
 boundary.west  = 'Dirichlet';
 
 % Values for Dirichlet BC
 
 TD.north = 10;
 TD.south = 50;
-TD.west  = 50;
+TD.west  = 100;
 TD.east  = 10;
 
 %% Thermal Conductivity Parameters:
@@ -85,7 +85,7 @@ heat_conduc = 'homogenous';
 % Define the Heat conductivity coefficient values
 % for non_homogenous & linear cases it has been assumed that lamda changes on x axis
 
-minlamda = 250;                     % minimum lamda value
+minlamda = 1;                       % minimum lamda value
 deltalamda = 100;                   % lamda difference from side to side (x axis)
 
 maxlamda = minlamda + deltalamda;   % maximum lamda value

@@ -21,8 +21,8 @@ function [stencil] = stamp(i, j, X, Y, lamda, alpha, Tinf, boundary)
 
 %% Init
 
-n = size(X, 1);
-m = size(X, 2);
+n = size(X, 1);     %dimY
+m = size(X, 2);     %dimX
 stencil = zeros(1, n*m);
 index=@(ii, jj) ii + (jj-1)*n;
 
@@ -157,33 +157,51 @@ switch nodePosition
         if strcmp(boundary.east, 'Dirichlet')
             stencil(index(i, j))     = 1;
         else
-            %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-            data_east
-            %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+            if (i~=1 && i~=n)
+                %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                data_east
+                %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-            bc_control = strcmp(boundary.east, 'Robin'); % factor that includes T_P in 3.16 (A.14)
+                bc_control = strcmp(boundary.east, 'Robin'); % factor that includes T_P in 3.16 (A.14)
 
-            %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
-            build_east
-            %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
+                build_east
+                %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+            else
+                %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                data_eastcorner
+                %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+                bc_control_east = strcmp(boundary.east, 'Robin'); % factor that includes T_P in 3.16
+                bc_control_ns = (i==1)*strcmp(boundary.north, 'Robin') + (i==n)*strcmp(boundary.south, 'Robin'); 
+
+                %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
+                build_eastcorner
+                %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+            end
 
             % P
             stencil(index(i, j))     = lamda(i,j)      * D0;
     
-            % North
-            stencil(index(i-1, j))   = lamda(i-1,j)    * D_1;
-    
             % West
             stencil(index(i, j-1))   = lamda(i,j-1)    * D_3;
     
-            % South
-            stencil(index(i+1, j))   = lamda(i+1,j)    * D1;
+            if i ~= 1
+                % North
+                stencil(index(i-1, j))   = lamda(i-1,j)    * D_1;
+
+                % NW
+                stencil(index(i-1, j-1)) = lamda(i-1, j-1) * D_4;
+            end
     
-            % SW
-            stencil(index(i+1, j-1)) = lamda(i+1, j-1) * D_2;
-    
-            % NW
-            stencil(index(i-1, j-1)) = lamda(i-1, j-1) * D_4;
+            if i ~= n
+                % South
+                stencil(index(i+1, j))   = lamda(i+1,j)    * D1;
+
+                % SW
+                stencil(index(i+1, j-1)) = lamda(i+1, j-1) * D_2;
+            end
         end
 
 %% West

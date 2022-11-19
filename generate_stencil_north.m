@@ -64,7 +64,7 @@ T_sw  =(T_SW + T_S  + T_P  + T_W)/4;
 T_s   =(T_P  + T_S)/2; T_sE  =(T_E  + T_SE)/2; T_sW  =(T_W  + T_SW)/2;
 
 T_eta =(T_P  + T_s)/2;
-T_etaE=(T_sE + T_E)/2;
+T_etaE=(T_sT_etaWE + T_E)/2;
 T_etaW=(T_sW + T_W)/2;
 
 % Gradients (Greens theorem) (A.15 -A.20)

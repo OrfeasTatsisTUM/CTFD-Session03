@@ -69,10 +69,10 @@ if strcmp(boundary.east, 'Dirichlet')
 %             B(index(i,dimX)) = B(index(i,dimX)) + TD.east/2;
 %         end
     end
-elseif strcmp(boundary.east, 'Robin')
-    for i = 1:dimX
-        B(index(i,dimX)) = -alpha/lamda(i,dimX) * Tinf;
-    end
+% elseif strcmp(boundary.east, 'Robin')
+%     for i = 1:dimX
+%         B(index(i,dimX)) = -alpha/lamda(i,dimX) * Tinf;
+%     end
 end
 
 % West
@@ -84,10 +84,10 @@ if strcmp(boundary.west, 'Dirichlet')
 %             B(index(i,1)) = B(index(i,1)) + TD.west/2;
 %         end
     end
-elseif strcmp(boundary.west, 'Robin')
-    for i = 1:dimX
-        B(index(i,1)) = -alpha/lamda(i,1) * Tinf;
-    end
+% elseif strcmp(boundary.west, 'Robin')
+%     for i = 1:dimX
+%         B(index(i,1)) = -alpha/lamda(i,1) * Tinf;
+%     end
 end
 
 %% Set up the system matrix A

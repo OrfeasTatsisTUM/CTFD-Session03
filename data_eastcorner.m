@@ -87,7 +87,7 @@
 
                 % Around P
                 dy_w_sw  = y_sw - y_w;  dx_w_sw  = x_sw - x_w;
-                dy_s_sw  = y_sw - y_s;  dx_s_sw  = x_sw - x_s;
+                dy_sw_s  = y_s - y_sw;  dx_sw_s  = x_s - x_sw;
 
                 % Areas
                 S_somega    = ((x_S*y_Sw  - x_Sw*y_S)  + (x_Sw*y_w   - x_w*y_Sw)   + (x_w*y_P  - x_P*y_w)  + (x_P*y_S - x_S*y_P))/2;

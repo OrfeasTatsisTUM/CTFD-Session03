@@ -56,9 +56,6 @@ syms  T_S T_W T_N T_NW T_SW T_P real
 % inner Temperatures
 syms T_n T_s T_sw T_nw T_omega T_Nomega T_Somega T_Nw T_nW T_sW T_w T_Sw real
 
-% corner Temperatures
-%syms T_eta1 T_eta2 T_etaw1 T_etaw2
-
 % T_P in A.14
 syms bc_control_east bc_control_ns alpha lamda Tinf
 
@@ -69,16 +66,16 @@ T_sw  =(T_SW + T_S  + T_P  + T_W)/4;
 T_nw  =(T_NW + T_N  + T_P  + T_W)/4;
 T_nW  =(T_W  + T_NW)/2;    T_sW  =(T_W + T_SW)/2;
 
-T_w   =(T_P  + T_W)/2; T_Nw  =(T_N  + T_NW)/2; T_Sw  =(T_S  + T_SW)/2;
+T_w   =(T_P  + T_W)/2;
+T_Nw  =(T_N  + T_NW)/2;
+T_Sw  =(T_S  + T_SW)/2;
 
 %1 = SE Corner; 2 = NE Corner
 T_eta1  =(T_n + T_P)/2;     T_eta2  =(T_s  + T_P)/2;
 T_etaW1 =(T_nW + T_W)/2;    T_etaW2 =(T_sW + T_W)/2;
-T_etaw1 =(T_nw + T_w)/2;    T_etaw2 =(T_sw + T_w)/2;
 T_omega =(T_P  + T_w)/2;
 T_Nomega=(T_Nw + T_N)/2;
 T_Somega=(T_Sw + T_S)/2;
-T_etaomega1 =(T_eta1 + T_etaw1);    T_etaomega2 = (T_eta2 + T_etaw2);
 
 % Gradients (Greens theorem) (A.15 -A.20)
 dTdx_somega =   (dy_w_Sw*T_sw + dy_Sw_S*T_Somega + dy_S_P*T_s + dy_P_w*T_omega) /S_somega;
@@ -97,12 +94,12 @@ dTdy_nomega =  -(dx_Nw_w*T_nw + dx_w_P*T_omega + dx_P_N*T_n + dx_N_Nw*T_Nomega) 
 % Build whole stecil acounting for quadratic lamda like in Helmholtz (A.14)
 
  DDT1= ((dTdx_etaw1*dy_nw_w - dTdy_etaw1*dx_nw_w...
-     - bc_control_ns*(dy_w_P - dx_w_P)*alpha/lamda*(T_omega-Tinf)...
+     - bc_control_ns*(dy_w_P - dx_w_P)*alpha/lamda*(T_omega-Tinf) ...
      - bc_control_east*(dy_P_n - dx_P_n)*alpha/lamda*(T_eta1-Tinf)...
      + dTdx_nomega*dy_n_nw -dTdy_nomega*dx_n_nw) /S_etaomega1);
 
   DDT2= ((dTdx_etaw2*dy_w_sw - dTdy_etaw2*dx_w_sw...
-     - bc_control_ns*(dy_P_w - dx_P_w)*alpha/lamda*(T_omega-Tinf)...
+     - bc_control_ns*(dy_P_w - dx_P_w)*alpha/lamda*(T_omega-Tinf) ...
      - bc_control_east*(dy_s_P - dx_s_P)*alpha/lamda*(T_eta2-Tinf)...
      + dTdx_somega*dy_sw_s -dTdy_somega*dx_sw_s) /S_etaomega2);
  
@@ -151,11 +148,11 @@ fileID2 = fopen(target_file, 'r+');
 
         fprintf(fileID2,'\t\t%% SW \n');
         fprintf(fileID2,'\t\tD_2=%s; \n\n', replace(char(stecil2(3)), 'lamda', 'lamda(i,j)'));
-
+        
         fprintf(fileID2,'\t\t%% P \n');
         fprintf(fileID2,'\t\tD0=%s; \n\n',replace(char(stecil2(4)), 'lamda', 'lamda(i,j)'));
 
-                fprintf(fileID2,'\n');
+        fprintf(fileID2,'\n');
         fprintf(fileID2,"else %%SE corner\n");
         fprintf(fileID2,'\t\t%% Nomenclature:\n');
         fprintf(fileID2,'\t\t%%\n');

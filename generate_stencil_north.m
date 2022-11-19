@@ -61,10 +61,12 @@ T_w   =(T_P  + T_W)/2;
 T_se  =(T_SE + T_S  + T_P  + T_E)/4;
 T_sw  =(T_SW + T_S  + T_P  + T_W)/4;
 
-T_s   =(T_P  + T_S)/2; T_sE  =(T_E  + T_SE)/2; T_sW  =(T_W  + T_SW)/2;
+T_s   =(T_P  + T_S)/2;
+T_sE  =(T_E  + T_SE)/2;
+T_sW  =(T_W  + T_SW)/2;
 
-T_eta =(T_P  + T_s)/2;
-T_etaE=(T_sT_etaWE + T_E)/2;
+T_eta =(T_w+T_e+T_se+T_sw)/4;
+T_etaE=(T_sE + T_E)/2;
 T_etaW=(T_sW + T_W)/2;
 
 % Gradients (Greens theorem) (A.15 -A.20)
@@ -80,11 +82,11 @@ dTdy_etaw =  -(dx_sW_s*T_sw + dx_s_P*T_eta + dx_P_W*T_w + dx_W_sW*T_etaW) /S_eta
 
 % Build whole stecil acounting for quadratic lamda like in Helmholtz (A.14)
 
- DDT= ((-bc_control*(dy_e_w-dx_e_w)*alpha/lamda*(T_P)...
+ DDT= (-bc_control*(dy_e_w-dx_e_w)*alpha/lamda*(T_P-Tinf)...
      + dy_se_e*dTdx_etae - dx_se_e*dTdy_etae...
      + dy_sw_se*dTdx_s   - dx_sw_se*dTdy_s...
-     + dy_w_sw*dTdx_etaw - dx_w_sw*dTdy_etaw ) /S_eta)...
-     / (bc_control * (dy_e_w-dx_e_w)/S_eta + 1 * ~bc_control);
+     + dy_w_sw*dTdx_etaw - dx_w_sw*dTdy_etaw ) /S_eta;...
+%      / (bc_control * (dy_e_w-dx_e_w)/S_eta + 1 * ~bc_control);
  
 % Make Temperature vector 
 T=[T_E; T_W; T_S; T_SW; T_SE; T_P];

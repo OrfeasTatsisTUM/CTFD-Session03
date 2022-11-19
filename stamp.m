@@ -1,4 +1,4 @@
-function [stencil] = stamp(i, j, X, Y, lamda, alpha, Tinf, boundary)
+function [stencil] = stamp(i, j, X, Y, lamda, alpha, Tinf, boundary,TD)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %stencil calculates the linear equation for node (i, j)
@@ -27,32 +27,35 @@ stencil = zeros(1, n*m);
 index=@(ii, jj) ii + (jj-1)*n;
 
 % Determine the node positon
-if j == 1
+
+if (i==1 || i==n) && j==m
+    nodePosition = 'EastCorner';
+elseif j == 1
     nodePosition = 'West';
-elseif j == size(X,2)
+elseif j == m
     nodePosition = 'East';
-elseif i== size(X,1)
+elseif i== n
     nodePosition = 'South';
 elseif i == 1
     nodePosition = 'North';
 else
     nodePosition = 'inner Node';
 end
-% corner_check(i,j) = (i==1 || i==dimY) && (j==1 || j==dimX);
+% WestCorner = (i==1 || i==n) && j==1;
 
 % Calculate the equation for the correct node position
 switch nodePosition
-%% Inner
+    %% Inner
     case 'inner Node'
-        
+
         %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         data_inner
         %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-        
+
         %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
         build_inner
         %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-              
+
         % P
         stencil(index(i, j))     = lamda(i,j)      * D0;
 
@@ -64,23 +67,23 @@ switch nodePosition
 
         % South
         stencil(index(i+1, j))   = lamda(i+1,j)    * D1;
-        
+
         % North
         stencil(index(i-1, j))   = lamda(i-1,j)    * D_1;
-        
+
         % NW
         stencil(index(i-1, j-1)) = lamda(i-1,j-1)  * D_4;
-        
+
         % NE
         stencil(index(i-1, j+1)) = lamda(i-1,j+1)  * D2;
-        
+
         % SW
         stencil(index(i+1, j-1)) = lamda(i+1, j-1) * D_2;
-        
+
         % SE
         stencil(index(i+1, j+1)) = lamda(i+1, j+1) * D4;
-        
-%% South
+
+        %% South
     case 'South'
 
         if strcmp(boundary.south, 'Dirichlet')
@@ -92,7 +95,7 @@ switch nodePosition
             %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
             bc_control = strcmp(boundary.south, 'Robin'); % factor that includes T_P in 3.16 (A.14)
-            
+
             %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
             build_south
             %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -115,18 +118,18 @@ switch nodePosition
             % NE
             stencil(index(i-1, j+1)) = lamda(i-1,j+1)  * D2;
         end
-      
-%% North
+
+        %% North
     case 'North'
 
         if strcmp(boundary.north, 'Dirichlet')
             stencil(index(i, j))     = 1;
         else
-            
+
             %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             data_north
             %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-            
+
             bc_control = strcmp(boundary.north, 'Robin'); % factor that includes T_P in 3.16 (A.14)
 
             %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
@@ -147,66 +150,84 @@ switch nodePosition
 
             % SW
             stencil(index(i+1, j-1)) = lamda(i+1, j-1) * D_2;
-            
+
             % SE
             stencil(index(i+1, j+1)) = lamda(i+1, j+1) * D4;
         end
 
-%% East
+        %% East
     case 'East'
         if strcmp(boundary.east, 'Dirichlet')
             stencil(index(i, j))     = 1;
         else
-            if (i~=1 && i~=n)
-                %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-                data_east
-                %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+            %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+            data_east
+            %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-                bc_control = strcmp(boundary.east, 'Robin'); % factor that includes T_P in 3.16 (A.14)
+            bc_control = strcmp(boundary.east, 'Robin'); % factor that includes T_P in 3.16 (A.14)
 
-                %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
-                build_east
-                %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-            else
-                %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-                data_eastcorner
-                %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-                bc_control_east = strcmp(boundary.east, 'Robin'); % factor that includes T_P in 3.16
-                bc_control_ns = (i==1)*strcmp(boundary.north, 'Robin') + (i==n)*strcmp(boundary.south, 'Robin'); 
-
-                %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
-                build_eastcorner
-                %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-            end
+            %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
+            build_east
+            %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
             % P
             stencil(index(i, j))     = lamda(i,j)      * D0;
-    
+
             % West
             stencil(index(i, j-1))   = lamda(i,j-1)    * D_3;
-    
-            if i ~= 1
-                % North
-                stencil(index(i-1, j))   = lamda(i-1,j)    * D_1;
 
-                % NW
-                stencil(index(i-1, j-1)) = lamda(i-1, j-1) * D_4;
-            end
-    
-            if i ~= n
-                % South
-                stencil(index(i+1, j))   = lamda(i+1,j)    * D1;
+            % North
+            stencil(index(i-1, j))   = lamda(i-1,j)    * D_1;
 
-                % SW
-                stencil(index(i+1, j-1)) = lamda(i+1, j-1) * D_2;
-            end
+            % NW
+            stencil(index(i-1, j-1)) = lamda(i-1, j-1) * D_4;
+
+            % South
+            stencil(index(i+1, j))   = lamda(i+1,j)    * D1;
+
+            % SW
+            stencil(index(i+1, j-1)) = lamda(i+1, j-1) * D_2;
         end
 
-%% West
+        %% West
     case 'West'
         if strcmp(boundary.west, 'Dirichlet')
             stencil(index(i, j))     = 1;
         end
+
+        %% Corners
+    case 'EastCorner'
+        %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+        data_eastcorner
+        %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+        bc_control_east = strcmp(boundary.east, 'Robin'); % factor that includes T_P in 3.16
+        bc_control_ns = (i==1)*strcmp(boundary.north, 'Robin') + (i==n)*strcmp(boundary.south, 'Robin');
+
+        %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
+        build_eastcorner
+        %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+        % P
+        stencil(index(i, j))     = lamda(i,j)      * D0;
+
+        % West
+        stencil(index(i, j-1))   = lamda(i,j-1)    * D_3;
+
+        if i ~= 1
+            % North
+            stencil(index(i-1, j))   = lamda(i-1,j)    * D_1;
+
+            % NW
+            stencil(index(i-1, j-1)) = lamda(i-1, j-1) * D_4;
+        end
+
+        if i ~= n
+            % South
+            stencil(index(i+1, j))   = lamda(i+1,j)    * D1;
+
+            % SW
+            stencil(index(i+1, j-1)) = lamda(i+1, j-1) * D_2;
+        end
 end
+

@@ -93,6 +93,7 @@
                 S_somega    = ((x_S*y_Sw  - x_Sw*y_S)  + (x_Sw*y_w   - x_w*y_Sw)   + (x_w*y_P  - x_P*y_w)  + (x_P*y_S - x_S*y_P))/2;
                 S_etaomega2 = ((x_s*y_sw  - x_sw*y_s)  + (x_sw*y_w   - x_w*y_sw)   + (x_w*y_P  - x_P*y_w)  + (x_P*y_s - x_s*y_P))/2;
                 S_etaw2     = ((x_s*y_sW  - x_sW*y_s)  + (x_sW*y_W   - x_W*y_sW)   + (x_W*y_P  - x_P*y_W)  + (x_P*y_s - x_s*y_P))/2;
+            
             else %SE
 
                 % Principal node coordinates

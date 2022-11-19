@@ -33,61 +33,53 @@ B = zeros(1,dimY*dimX);
 % North
 if strcmp(boundary.north, 'Dirichlet')
     for i = 1:dimX
-%         if i ~= 1 && i ~= dimX
+        if i == 1 && strcmp(boundary.west, 'Dirichlet')
+            B(index(1,i)) = B(index(1,i)) + TD.north/2;
+        elseif i == dimX && strcmp(boundary.east, 'Dirichlet')
+            B(index(1,i)) = B(index(1,i)) + TD.north/2;
+        else
             B(index(1,i)) = TD.north;
-%         else
-%             B(index(1,i)) = B(index(1,i)) + TD.north/2;
-%         end
-    end
-elseif strcmp(boundary.north, 'Robin')
-    for i = 1:dimX
-        B(index(1,i)) = -alpha/lamda(1,i) * Tinf;
+        end
     end
 end
 
 % South
 if strcmp(boundary.south, 'Dirichlet')
     for i = 1:dimX
-%         if i ~= 1 && i ~= dimX
+        if i== 1 && strcmp(boundary.west, 'Dirichlet')
+            B(index(dimY,i)) = B(index(dimY,i)) + TD.south/2;
+        elseif i == dimX && strcmp(boundary.east, 'Dirichlet')
+            B(index(dimY,i)) = B(index(dimY,i)) + TD.south/2;
+        else
             B(index(dimY,i)) = TD.south;
-%         else
-%             B(index(dimY,i)) = B(index(dimY,i)) + TD.south/2;
-%         end
-    end
-elseif strcmp(boundary.south, 'Robin')
-    for i = 1:dimX
-        B(index(dimY,i)) = -alpha/lamda(dimY,i) * Tinf;
+        end
     end
 end
 
 % East
 if strcmp(boundary.east, 'Dirichlet')
     for i = 1:dimY
-%         if i~= 1 && i~=dimY
+        if i == 1 && strcmp(boundary.north, 'Dirichlet')
+            B(index(i,dimX)) = B(index(i,dimX)) + TD.east/2;
+        elseif i == dimY && strcmp(boundary.south, 'Dirichlet')
+            B(index(i,dimX)) = B(index(i,dimX)) + TD.east/2;
+        else
             B(index(i,dimX)) = TD.east;
-%         else
-%             B(index(i,dimX)) = B(index(i,dimX)) + TD.east/2;
-%         end
+        end
     end
-% elseif strcmp(boundary.east, 'Robin')
-%     for i = 1:dimX
-%         B(index(i,dimX)) = -alpha/lamda(i,dimX) * Tinf;
-%     end
 end
 
 % West
 if strcmp(boundary.west, 'Dirichlet')
     for i = 1:dimY
-%         if i~= 1 && i~=dimY
+        if i == 1 && strcmp(boundary.north, 'Dirichlet')
+            B(index(i,1)) = B(index(i,1)) + TD.west/2;
+        elseif i == dimY && strcmp(boundary.south, 'Dirichlet')
+            B(index(i,1)) = B(index(i,1)) + TD.west/2;
+        else
             B(index(i,1)) = TD.west;
-%         else
-%             B(index(i,1)) = B(index(i,1)) + TD.west/2;
-%         end
+        end
     end
-% elseif strcmp(boundary.west, 'Robin')
-%     for i = 1:dimX
-%         B(index(i,1)) = -alpha/lamda(i,1) * Tinf;
-%     end
 end
 
 %% Set up the system matrix A
@@ -96,7 +88,7 @@ A = zeros(dimY*dimX);
 for i = 1:dimY
     for j = 1:dimX
         % Fill the system matrix and the right-hand side for node (i,j)
-        [A(index(i,j), :)] =  stamp(i, j, X, Y, lamda, alpha, Tinf, boundary);
+        [A(index(i,j), :)] =  stamp(i, j, X, Y, lamda, alpha, Tinf, boundary,TD);
     end
 end
 

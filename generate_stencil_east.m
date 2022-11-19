@@ -61,11 +61,13 @@ T_s   =(T_P  + T_S)/2;
 T_sw  =(T_SW + T_S  + T_P  + T_W)/4;
 T_nw  =(T_NW + T_N  + T_P  + T_W)/4;
 
-T_w   =(T_P  + T_W)/2; T_Nw  =(T_N  + T_NW)/2; T_Sw  =(T_S  + T_SW)/2;
+T_w   =(T_P  + T_W)/2;
+T_Nw  =(T_N  + T_NW)/2;
+T_Sw  =(T_S  + T_SW)/2;
 
-T_omega =(T_P  + T_w)/2;
-T_Nomega=(T_Nw + T_N)/2;
-T_Somega=(T_Sw + T_S)/2;
+T_omega = (T_nw+T_n+T_s+T_sw)/4;
+T_Nomega= (T_Nw + T_N)/2;
+T_Somega= (T_Sw + T_S)/2;
 
 % Gradients (Greens theorem) (A.15 -A.20)
 dTdx_somega =   (dy_w_Sw*T_sw + dy_Sw_S*T_Somega + dy_S_P*T_s + dy_P_w*T_omega) /S_somega;

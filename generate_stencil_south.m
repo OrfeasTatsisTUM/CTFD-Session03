@@ -61,9 +61,11 @@ T_w   =(T_P  + T_W)/2;
 T_ne  =(T_NE + T_N  + T_P  + T_E)/4;
 T_nw  =(T_NW + T_N  + T_P  + T_W)/4;
 
-T_n   =(T_P  + T_N)/2; T_nE  =(T_E  + T_NE)/2; T_nW  =(T_W  + T_NW)/2;
+T_n   =(T_P  + T_N)/2;
+T_nE  =(T_E  + T_NE)/2;
+T_nW  =(T_W  + T_NW)/2;
 
-T_eta =(T_P  + T_n)/2;
+T_eta =(T_nw+T_ne+T_e+T_w)/4;
 T_etaE=(T_nE + T_E)/2;
 T_etaW=(T_nW + T_W)/2;
 
@@ -80,11 +82,11 @@ dTdy_etaw =  -(dx_W_P*T_w + dx_P_n*T_eta + dx_n_nW*T_nw + dx_nW_W*T_etaW) /S_eta
 
 % Build whole stecil acounting for quadratic lamda like in Helmholtz (A.14)
 
- DDT= ((-bc_control*(dy_w_e-dx_w_e)*alpha/lamda*T_P...
+ DDT= (-bc_control*(dy_w_e-dx_w_e)*alpha/lamda*(T_P-Tinf)...
      + dy_e_ne*dTdx_etae - dx_e_ne*dTdy_etae...
      + dy_ne_nw*dTdx_n   - dx_ne_nw*dTdy_n...
-     + dy_nw_w*dTdx_etaw - dx_nw_w*dTdy_etaw ) /S_eta)...
-     / (bc_control * (dy_w_e-dx_w_e)/S_eta + 1 * ~bc_control);
+     + dy_nw_w*dTdx_etaw - dx_nw_w*dTdy_etaw ) /S_eta;...
+%      / (bc_control * (dy_w_e-dx_w_e)/S_eta + 1 * ~bc_control);
  
 % Make Temperature vector 
 T=[T_E; T_W; T_N; T_NW; T_NE; T_P];

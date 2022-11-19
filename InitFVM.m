@@ -65,8 +65,8 @@ Tinf = 90;
 %% Boundary conditions (Only Dirichlet applied in Session 03) 
 % Type: 1) Dirichlet    2) Neumann    3) Robin
 boundary.south = 'Neumann';
-boundary.north = 'Dirichlet';
-boundary.east  = 'Neumann';
+boundary.north = 'Robin';
+boundary.east  = 'Dirichlet';
 boundary.west  = 'Dirichlet';
 
 % Values for Dirichlet BC

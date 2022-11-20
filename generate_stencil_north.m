@@ -53,7 +53,7 @@ syms  T_E T_W T_S T_SW T_SE T_P real
 syms T_e T_w T_se T_sw T_eta T_etaE T_etaW T_sE T_s T_sW real
 
 % T_P in A.14
-syms bc_control alpha lamda Tinf
+syms bc_ctrl alpha lamda Tinf
 
 % Define inner Temperatures as interpolation of outer Temperatures (3.33 - 3.36)
 T_e   =(T_P  + T_E)/2;
@@ -82,11 +82,11 @@ dTdy_etaw =  -(dx_sW_s*T_sw + dx_s_P*T_eta + dx_P_W*T_w + dx_W_sW*T_etaW) /S_eta
 
 % Build whole stecil acounting for quadratic lamda like in Helmholtz (A.14)
 
- DDT= (-bc_control*(dy_e_w-dx_e_w)*alpha/lamda*(T_P-Tinf)...
+ DDT= (-bc_ctrl*(dy_e_w-dx_e_w)*alpha/lamda*(T_P-Tinf)...
      + dy_se_e*dTdx_etae - dx_se_e*dTdy_etae...
      + dy_sw_se*dTdx_s   - dx_sw_se*dTdy_s...
      + dy_w_sw*dTdx_etaw - dx_w_sw*dTdy_etaw ) /S_eta;...
-%      / (bc_control * (dy_e_w-dx_e_w)/S_eta + 1 * ~bc_control);
+%      / (bc_ctrl * (dy_e_w-dx_e_w)/S_eta + 1 * ~bc_ctrl);
  
 % Make Temperature vector 
 T=[T_E; T_W; T_S; T_SW; T_SE; T_P];

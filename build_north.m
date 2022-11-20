@@ -40,5 +40,5 @@ D_2=((dx_w_sw*(dx_s_P/16 + dx_W_sW/4 + dx_sW_s/4))/S_etaw + (dy_w_sw*(dy_s_P/16 
 D4=((dx_se_e*(dx_P_s/16 + dx_sE_E/4 + dx_s_sE/4))/S_etae + (dy_se_e*(dy_P_s/16 + dy_sE_E/4 + dy_s_sE/4))/S_etae + (dx_s_P*dx_w_sw)/(16*S_etaw) + (dx_Se_e*dx_sw_se)/(4*S_s) + (dy_s_P*dy_w_sw)/(16*S_etaw) + (dy_Se_e*dy_sw_se)/(4*S_s))/S_eta; 
 
 % P 
-D0=((dx_se_e*(dx_E_P/2 + (3*dx_P_s)/8 + dx_s_sE/4))/S_etae + (dx_w_sw*(dx_P_W/2 + (3*dx_s_P)/8 + dx_sW_s/4))/S_etaw + (dy_se_e*(dy_E_P/2 + (3*dy_P_s)/8 + dy_s_sE/4))/S_etae + (dy_w_sw*(dy_P_W/2 + (3*dy_s_P)/8 + dy_sW_s/4))/S_etaw + (dx_sw_se*(dx_e_w + dx_Se_e/4 + dx_w_Sw/4))/S_s + (dy_sw_se*(dy_e_w + dy_Se_e/4 + dy_w_Sw/4))/S_s + (alpha*bc_control*(dx_e_w - dy_e_w))/lamda(i,j))/S_eta; 
+D0=((dx_se_e*(dx_E_P/2 + (3*dx_P_s)/8 + dx_s_sE/4))/S_etae + (dx_w_sw*(dx_P_W/2 + (3*dx_s_P)/8 + dx_sW_s/4))/S_etaw + (dy_se_e*(dy_E_P/2 + (3*dy_P_s)/8 + dy_s_sE/4))/S_etae + (dy_w_sw*(dy_P_W/2 + (3*dy_s_P)/8 + dy_sW_s/4))/S_etaw + (dx_sw_se*(dx_e_w + dx_Se_e/4 + dx_w_Sw/4))/S_s + (dy_sw_se*(dy_e_w + dy_Se_e/4 + dy_w_Sw/4))/S_s + (alpha*bc_ctrl*(dx_e_w - dy_e_w))/lamda(i,j))/S_eta; 
 

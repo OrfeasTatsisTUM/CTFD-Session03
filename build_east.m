@@ -46,5 +46,5 @@ D_4=-((dx_n_nw*(dx_w_P/16 + dx_N_Nw/4 + dx_Nw_w/4))/S_nomega - (dy_n_nw*(dy_w_P/
 D_2=-((dx_sw_s*(dx_P_w/16 + dx_Sw_S/4 + dx_w_Sw/4))/S_somega - (dy_sw_s*(dy_P_w/16 + dy_Sw_S/4 + dy_w_Sw/4))/S_somega + (dx_w_P*dx_n_nw)/(16*S_nomega) + (dx_sW_s*dx_nw_sw)/(4*S_w) - (dy_w_P*dy_n_nw)/(16*S_nomega) - (dy_sW_s*dy_nw_sw)/(4*S_w))/S_omega; 
 
 % P 
-D0=((dy_n_nw*(dy_P_N/2 + (3*dy_w_P)/8 + dy_Nw_w/4))/S_nomega - (dx_sw_s*(dx_S_P/2 + (3*dx_P_w)/8 + dx_w_Sw/4))/S_somega - (dx_n_nw*(dx_P_N/2 + (3*dx_w_P)/8 + dx_Nw_w/4))/S_nomega + (dy_sw_s*(dy_S_P/2 + (3*dy_P_w)/8 + dy_w_Sw/4))/S_somega - (dx_nw_sw*(dx_s_n + dx_n_nW/4 + dx_sW_s/4))/S_w + (dy_nw_sw*(dy_s_n + dy_n_nW/4 + dy_sW_s/4))/S_w + (alpha*bc_control*(dx_s_n - dy_s_n))/lamda(i,j))/S_omega; 
+D0=((dy_n_nw*(dy_P_N/2 + (3*dy_w_P)/8 + dy_Nw_w/4))/S_nomega - (dx_sw_s*(dx_S_P/2 + (3*dx_P_w)/8 + dx_w_Sw/4))/S_somega - (dx_n_nw*(dx_P_N/2 + (3*dx_w_P)/8 + dx_Nw_w/4))/S_nomega + (dy_sw_s*(dy_S_P/2 + (3*dy_P_w)/8 + dy_w_Sw/4))/S_somega - (dx_nw_sw*(dx_s_n + dx_n_nW/4 + dx_sW_s/4))/S_w + (dy_nw_sw*(dy_s_n + dy_n_nW/4 + dy_sW_s/4))/S_w + (alpha*bc_ctrl*(dx_s_n - dy_s_n))/lamda(i,j))/S_omega; 
 

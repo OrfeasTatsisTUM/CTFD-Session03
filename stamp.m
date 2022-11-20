@@ -96,7 +96,7 @@ switch nodePosition
             data_south
             %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-            bc_control = strcmp(boundary.south, 'Robin'); % factor that includes T_P in 3.16 (A.14)
+            bc_ctrl = strcmp(boundary.south, 'Robin'); % factor that includes T_P in 3.16 (A.14)
 
             %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
             build_south
@@ -132,7 +132,7 @@ switch nodePosition
             data_north
             %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-            bc_control = strcmp(boundary.north, 'Robin'); % factor that includes T_P in 3.16 (A.14)
+            bc_ctrl = strcmp(boundary.north, 'Robin'); % factor that includes T_P in 3.16 (A.14)
 
             %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
             build_north
@@ -166,7 +166,7 @@ switch nodePosition
             data_east
             %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-            bc_control = strcmp(boundary.east, 'Robin'); % factor that includes T_P in 3.16 (A.14)
+            bc_ctrl = strcmp(boundary.east, 'Robin'); % factor that includes T_P in 3.16 (A.14)
 
             %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
             build_east
@@ -203,8 +203,9 @@ switch nodePosition
         data_eastcorner
         %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-        bc_control_east = strcmp(boundary.east, 'Robin'); % factor that includes T_P in 3.16
-        bc_control_ns = (i==1)*strcmp(boundary.north, 'Robin') + (i==n)*strcmp(boundary.south, 'Robin');
+        bc_ctrl_east = strcmp(boundary.east, 'Robin'); % factor that includes T_P in 3.16
+        bc_ctrl_n = (i==1)*strcmp(boundary.north, 'Robin');
+        bc_ctrl_s = (i==n)*strcmp(boundary.south, 'Robin');
 
         %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
         build_eastcorner
@@ -237,8 +238,9 @@ switch nodePosition
         data_westcorner
         %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-        bc_control_west = strcmp(boundary.west, 'Robin'); % factor that includes T_P in 3.16
-        bc_control_ns = (i==1)*strcmp(boundary.north, 'Robin') + (i==n)*strcmp(boundary.south, 'Robin');
+        bc_ctrl_west = strcmp(boundary.west, 'Robin'); % factor that includes T_P in 3.16
+        bc_ctrl_n = (i==1)*strcmp(boundary.north, 'Robin');
+        bc_ctrl_s = (i==n)*strcmp(boundary.south, 'Robin');
 
         %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
         build_westcorner

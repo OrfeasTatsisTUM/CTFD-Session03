@@ -66,7 +66,7 @@ Tinf = 90;
 % Type: 1) Dirichlet    2) Neumann    3) Robin
 boundary.south = 'Neumann'; %q=0 for mirroring
 boundary.north = 'Robin';
-boundary.east  = 'Dirichlet';
+boundary.east  = 'Robin';
 boundary.west  = 'Dirichlet';
 
 % Values for Dirichlet BC

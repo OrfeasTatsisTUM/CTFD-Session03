@@ -30,6 +30,8 @@ index=@(ii, jj) ii + (jj-1)*n;
 
 if (i==1 || i==n) && j==m
     nodePosition = 'EastCorner';
+elseif (i==1 || i==n) && j==1
+    nodePosition = 'WestCorner';
 elseif j == 1
     nodePosition = 'West';
 elseif j == m
@@ -228,6 +230,40 @@ switch nodePosition
 
             % SW
             stencil(index(i+1, j-1)) = lamda(i+1, j-1) * D_2;
+        end
+
+    case 'WestCorner'
+        %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+        data_westcorner
+        %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+        bc_control_west = strcmp(boundary.west, 'Robin'); % factor that includes T_P in 3.16
+        bc_control_ns = (i==1)*strcmp(boundary.north, 'Robin') + (i==n)*strcmp(boundary.south, 'Robin');
+
+        %$$$$$$$$$$$$$$$$$$$$$ Stencil $$$$$$$$$$$$$$$$$$$
+        build_westcorner
+        %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+        % P
+        stencil(index(i, j))     = lamda(i,j)      * D0;
+
+        % East
+        stencil(index(i, j+1))   = lamda(i,j+1)    * D3;
+
+        if i ~= 1
+            % North
+            stencil(index(i-1, j))   = lamda(i-1,j)    * D_1;
+
+            % NE
+            stencil(index(i-1, j+1)) = lamda(i-1,j+1)  * D2;
+        end
+
+        if i ~= n
+            % South
+            stencil(index(i+1, j))   = lamda(i+1,j)    * D1;
+
+            % SE
+            stencil(index(i+1, j+1)) = lamda(i+1, j+1) * D4;
         end
 end
 

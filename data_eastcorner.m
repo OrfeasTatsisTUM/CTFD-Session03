@@ -108,7 +108,7 @@
                 y_nw = (y_Nw + y_w)/2;  x_nw = (x_Nw + x_w)/2;
 
                 y_Nomega = (y_Nw + y_N)/2;  x_Nomega = (x_Nw + x_N)/2;
-                y_nomega = (y_nw + y_w)/2;  x_nomega = (x_nw + x_w)/2;
+                y_nomega = (y_nw + y_n)/2;  x_nomega = (x_nw + x_n)/2;
 
                 % Inter node distances
 

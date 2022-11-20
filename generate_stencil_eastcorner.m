@@ -27,7 +27,7 @@ fclose(fopen(target_file, 'w'));
 % Initialize symbolic variables for distances,
 % areas, lambdas, Temperatures
 
-% Around somega
+% Around sω
 syms dy_w_Sw dy_Sw_S dy_S_P dy_P_w real
 syms dx_w_Sw dx_Sw_S dx_S_P dx_P_w real
 
@@ -39,7 +39,7 @@ syms dx_nW_W dx_W_P dx_P_n dx_n_nW real
 syms dy_W_sW dy_sW_s dy_s_P dy_P_W  real
 syms dx_W_sW dx_sW_s dx_s_P dx_P_W real
 
-% Around nomega
+% Around nω
 syms dy_Nw_w dy_w_P dy_P_N dy_N_Nw real
 syms dx_Nw_w dx_w_P dx_P_N dx_N_Nw real 
 

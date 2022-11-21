@@ -33,9 +33,9 @@ B = zeros(1,dimY*dimX);
 % North
 if strcmp(boundary.north, 'Dirichlet')
     for i = 1:dimX
-        if i == 1
+        if i == 1 && strcmp(boundary.west, 'Dirichlet')
             B(index(1,i)) = B(index(1,i)) + TD.north/2;
-        elseif i == dimX
+        elseif i == dimX && strcmp(boundary.east, 'Dirichlet')
             B(index(1,i)) = B(index(1,i)) + TD.north/2;
         else
             B(index(1,i)) = TD.north;
@@ -46,9 +46,9 @@ end
 % South
 if strcmp(boundary.south, 'Dirichlet')
     for i = 1:dimX
-        if i== 1
+        if i== 1 && strcmp(boundary.west, 'Dirichlet')
             B(index(dimY,i)) = B(index(dimY,i)) + TD.south/2;
-        elseif i == dimX
+        elseif i == dimX && strcmp(boundary.east, 'Dirichlet')
             B(index(dimY,i)) = B(index(dimY,i)) + TD.south/2;
         else
             B(index(dimY,i)) = TD.south;
@@ -59,9 +59,9 @@ end
 % East
 if strcmp(boundary.east, 'Dirichlet')
     for i = 1:dimY
-        if i == 1
+        if i == 1 && strcmp(boundary.north, 'Dirichlet')
             B(index(i,dimX)) = B(index(i,dimX)) + TD.east/2;
-        elseif i == dimY
+        elseif i == dimY && strcmp(boundary.south, 'Dirichlet')
             B(index(i,dimX)) = B(index(i,dimX)) + TD.east/2;
         else
             B(index(i,dimX)) = TD.east;
@@ -74,7 +74,7 @@ if strcmp(boundary.west, 'Dirichlet')
     for i = 1:dimY
         if i == 1 && strcmp(boundary.north, 'Dirichlet')
             B(index(i,1)) = B(index(i,1)) + TD.west/2;
-        elseif i == dimY
+        elseif i == dimY && strcmp(boundary.south, 'Dirichlet')
             B(index(i,1)) = B(index(i,1)) + TD.west/2;
         else
             B(index(i,1)) = TD.west;

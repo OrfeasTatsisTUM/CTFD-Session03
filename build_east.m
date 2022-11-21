@@ -32,7 +32,7 @@
 
 % South 
 D1=-((3*dx_w_P*dx_n_nw)/(16*S_nomega) + (dx_sW_s*dx_nw_sw)/(4*S_w) - (3*dy_w_P*dy_n_nw)/(16*S_nomega) - (dy_sW_s*dy_nw_sw)/(4*S_w) + (dx_sw_s*(dx_S_P/2 + (3*dx_P_w)/16 + (3*dx_Sw_S)/4 + dx_w_Sw/4))/S_somega - (dy_sw_s*(dy_S_P/2 + (3*dy_P_w)/16 + (3*dy_Sw_S)/4 + dy_w_Sw/4))/S_somega)/S_omega; 
-
+D1=((dx_n_nw*(dx_w_P/8 + dx_Nw_w/4))/S_nomega + (dx_sw_s*(dx_P_w/8 + dx_w_Sw/4))/S_somega + (dy_n_nw*(dy_w_P/8 + dy_Nw_w/4))/S_nomega + (dy_sw_s*(dy_P_w/8 + dy_w_Sw/4))/S_somega + (dx_nw_sw*(dx_n_nW/4 + dx_sW_s/4 + dx_nW_sW))/S_w + (dy_nw_sw*(dy_n_nW/4 + dy_sW_s/4 + dy_nW_sW))/S_w)/S_omega; 
 % West 
 D_3=-((dx_n_nw*(dx_w_P/8 + dx_Nw_w/4))/S_nomega + (dx_sw_s*(dx_P_w/8 + dx_w_Sw/4))/S_somega - (dy_n_nw*(dy_w_P/8 + dy_Nw_w/4))/S_nomega - (dy_sw_s*(dy_P_w/8 + dy_w_Sw/4))/S_somega + (dx_nw_sw*(dx_n_nW/4 + dx_sW_s/4 + dx_nW_sW))/S_w - (dy_nw_sw*(dy_n_nW/4 + dy_sW_s/4 + dy_nW_sW))/S_w)/S_omega; 
 

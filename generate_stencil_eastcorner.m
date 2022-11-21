@@ -12,6 +12,7 @@
 % Either way all distances and surfaces (areas) have to be provided by you.
 
 
+% 1 = SE Corner; 2 = NE Corner (of the whole matrix)
 
 clear; clc;
 
@@ -92,7 +93,8 @@ dTdy_nomega =  -(dx_Nw_w*T_nw + dx_w_P*T_omega + dx_P_N*T_n + dx_N_Nw*T_Nomega) 
 
 
 % Build whole stecil acounting for quadratic lamda like in Helmholtz (A.14)
-
+% bc_ctrl_east, n & s are =1 when we have Robin on the respective edge...
+% otherwise they are =0
  DDT1= ((dTdx_etaw1*dy_nw_w - dTdy_etaw1*dx_nw_w...
      - bc_ctrl_s*(dy_w_P - dx_w_P)*alpha/lamda*(T_omega-Tinf) ...
      - bc_ctrl_east*(dy_P_n - dx_P_n)*alpha/lamda*(T_eta1-Tinf)...

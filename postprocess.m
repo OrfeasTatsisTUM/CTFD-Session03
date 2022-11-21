@@ -18,6 +18,6 @@ contour(X,-Y,T)
 set(gcf, 'Position',[635,150,550,550]);
 
 figure(3)
-surf(X,Y,T); %hold on; surf(X,-Y,T)
+surf(X,Y,T); hold on; surf(X,-Y,T)
 set(gcf, 'Position',[1200,150,550,550]);
 view(45,24);            %view angle

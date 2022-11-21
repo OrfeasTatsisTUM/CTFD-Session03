@@ -12,6 +12,7 @@
 % Either way all distances and surfaces (areas) have to be provided by you.
 
 
+% 1 = SW Corner; 2 = NW Corner (of the whole matrix)
 
 clear; clc;
 
@@ -70,7 +71,7 @@ T_e   =(T_P  + T_E)/2;
 T_Ne  =(T_N  + T_NE)/2;
 T_Se  =(T_S  + T_SE)/2;
 
-%1 = SE Corner; 2 = NE Corner
+%1 = SW Corner; 2 = NW Corner
 T_eta1  =(T_n + T_P)/2;     T_eta2  =(T_s  + T_P)/2;
 T_etaE1 =(T_nE + T_E)/2;    T_etaE2 =(T_sE + T_E)/2;
 T_omega =(T_P  + T_e)/2;
@@ -92,16 +93,17 @@ dTdy_nomega =  -(dx_N_P*T_n + dx_P_e*T_omega + dx_e_Ne*T_ne + dx_Ne_N*T_Nomega) 
 
 
 % Build whole stecil acounting for quadratic lamda like in Helmholtz (A.14)
-
- DDT1= ((dTdx_etae1*dy_e_ne - dTdy_etae1*dx_e_ne...
+% bc_ctrl_west, n & s are =1 when we have Robin on the respective edge...
+% otherwise they are =0
+ DDT1= (dTdx_etae1*dy_e_ne - dTdy_etae1*dx_e_ne...
      - bc_ctrl_s*(dy_P_e - dx_P_e)*alpha/lamda*(T_omega-Tinf) ...
      - bc_ctrl_west*(dy_n_P - dx_n_P)*alpha/lamda*(T_eta1-Tinf)...
-     + dTdx_nomega*dy_ne_n - dTdy_nomega*dx_ne_n) /S_etaomega1);
+     + dTdx_nomega*dy_ne_n - dTdy_nomega*dx_ne_n) /S_etaomega1;
     
-  DDT2= ((dTdx_etae2*dy_se_e - dTdy_etae2*dx_se_e...
+  DDT2= (dTdx_etae2*dy_se_e - dTdy_etae2*dx_se_e...
      - bc_ctrl_n*(dy_e_P - dx_e_P)*alpha/lamda*(T_omega-Tinf) ...
      - bc_ctrl_west*(dy_P_s - dx_P_s)*alpha/lamda*(T_eta2-Tinf)...
-     + dTdx_somega*dy_s_se -dTdy_somega*dx_s_se) /S_etaomega2);
+     + dTdx_somega*dy_s_se -dTdy_somega*dx_s_se) /S_etaomega2;
  
 % Make Temperature vector 
 T1=[T_N; T_E; T_NE; T_P];

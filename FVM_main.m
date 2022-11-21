@@ -1,6 +1,10 @@
 clear; close all; clc;
 
-%% SESSION_03 - Tatsis, Orfeas Emmanouil
+%% Tatsis, Orfeas Emmanouil
+%% Fernando Cruz Ceravalls
+%% Yuechen Chen
+
+%% SESSION_03
 %  TUM - Ass. Professorship for Thermo Fluid Dynamics
 %  WS022-023
 

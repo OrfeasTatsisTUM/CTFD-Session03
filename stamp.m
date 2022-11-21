@@ -238,7 +238,7 @@ switch nodePosition
         data_westcorner
         %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-        bc_ctrl_west = strcmp(boundary.west, 'Robin'); % factor that includes T_P in 3.16
+        bc_ctrl_west = strcmp(boundary.west, 'Robin'); % factor that includes T_P in [3.16]
         bc_ctrl_n = (i==1)*strcmp(boundary.north, 'Robin');
         bc_ctrl_s = (i==n)*strcmp(boundary.south, 'Robin');
 

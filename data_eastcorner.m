@@ -90,9 +90,9 @@
                 dy_sw_s  = y_s - y_sw;  dx_sw_s  = x_s - x_sw;
 
                 % Areas
-                S_somega    = ((x_S*y_Sw  - x_Sw*y_S)  + (x_Sw*y_w   - x_w*y_Sw)   + (x_w*y_P  - x_P*y_w)  + (x_P*y_S - x_S*y_P))/2;
-                S_etaomega2 = ((x_s*y_sw  - x_sw*y_s)  + (x_sw*y_w   - x_w*y_sw)   + (x_w*y_P  - x_P*y_w)  + (x_P*y_s - x_s*y_P))/2;
-                S_etaw2     = ((x_s*y_sW  - x_sW*y_s)  + (x_sW*y_W   - x_W*y_sW)   + (x_W*y_P  - x_P*y_W)  + (x_P*y_s - x_s*y_P))/2;
+                S_somega    = abs((x_S*y_Sw  - x_Sw*y_S)  + (x_Sw*y_w   - x_w*y_Sw)   + (x_w*y_P  - x_P*y_w)  + (x_P*y_S - x_S*y_P))/2;
+                S_etaomega2 = abs((x_s*y_sw  - x_sw*y_s)  + (x_sw*y_w   - x_w*y_sw)   + (x_w*y_P  - x_P*y_w)  + (x_P*y_s - x_s*y_P))/2;
+                S_etaw2     = abs((x_s*y_sW  - x_sW*y_s)  + (x_sW*y_W   - x_W*y_sW)   + (x_W*y_P  - x_P*y_W)  + (x_P*y_s - x_s*y_P))/2;
             
             else %SE
 
@@ -129,7 +129,7 @@
                 dy_n_nw  = y_nw - y_n;  dx_n_nw  = x_nw - x_n; 
 
                 % Areas
-                S_nomega    = ((x_P*y_w  - x_w*y_P)  + (x_w*y_Nw   - x_Nw*y_w)   + (x_Nw*y_N  - x_N*y_Nw)  + (x_N*y_P - x_P*y_N))/2;
-                S_etaomega1 = ((x_P*y_w  - x_w*y_P)  + (x_w*y_nw   - x_nw*y_w)   + (x_nw*y_n  - x_n*y_nw)  + (x_n*y_P - x_P*y_n))/2;
-                S_etaw1     = ((x_P*y_W  - x_W*y_P)  + (x_W*y_nW   - x_nW*y_W)   + (x_nW*y_n  - x_n*y_nW)  + (x_n*y_P - x_P*y_n))/2;
+                S_nomega    = abs((x_P*y_w  - x_w*y_P)  + (x_w*y_Nw   - x_Nw*y_w)   + (x_Nw*y_N  - x_N*y_Nw)  + (x_N*y_P - x_P*y_N))/2;
+                S_etaomega1 = abs((x_P*y_w  - x_w*y_P)  + (x_w*y_nw   - x_nw*y_w)   + (x_nw*y_n  - x_n*y_nw)  + (x_n*y_P - x_P*y_n))/2;
+                S_etaw1     = abs((x_P*y_W  - x_W*y_P)  + (x_W*y_nW   - x_nW*y_W)   + (x_nW*y_n  - x_n*y_nW)  + (x_n*y_P - x_P*y_n))/2;
             end

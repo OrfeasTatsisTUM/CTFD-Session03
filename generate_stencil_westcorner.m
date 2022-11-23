@@ -72,11 +72,11 @@ T_Ne  =(T_N  + T_NE)/2;
 T_Se  =(T_S  + T_SE)/2;
 
 %1 = SW Corner; 2 = NW Corner
-T_eta1  =(T_n + T_P)/2;     T_eta2  =(T_s  + T_P)/2;
-T_etaE1 =(T_nE + T_E)/2;    T_etaE2 =(T_sE + T_E)/2;
-T_omega =(T_P  + T_e)/2;
-T_Nomega=(T_Ne + T_N)/2;
-T_Somega=(T_Se + T_S)/2;
+T_eta1  =(T_N + 3*T_P)/4;     T_eta2  =(T_S  + 3*T_P)/4;
+T_etaE1 =(T_NE + 3*T_E)/4;    T_etaE2 =(T_SE + 3*T_E)/4;
+T_omega =(3*T_P  + T_E)/4;
+T_Nomega=(T_NE + 3*T_N)/4;
+T_Somega=(T_SE + 3*T_S)/4;
 
 % Gradients (Greens theorem) (A.15 -A.20)
 dTdx_somega =   (dy_P_S*T_s + dy_S_Se*T_Somega + dy_Se_e*T_se + dy_e_P*T_omega) /S_somega;

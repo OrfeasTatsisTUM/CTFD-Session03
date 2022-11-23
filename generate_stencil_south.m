@@ -65,9 +65,9 @@ T_n   =(T_P  + T_N)/2;
 T_nE  =(T_E  + T_NE)/2;
 T_nW  =(T_W  + T_NW)/2;
 
-T_eta =(T_nw+T_ne+T_e+T_w)/4;
-T_etaE=(T_nE + T_E)/2;
-T_etaW=(T_nW + T_W)/2;
+T_eta =(3*T_P+T_N)/4;
+T_etaE=(T_NE + 3*T_E)/4;
+T_etaW=(T_NW + 3*T_W)/4;
 
 % Gradients (Greens theorem) (A.15 -A.20)
 dTdx_etae =   (dy_P_E*T_e + dy_E_nE*T_etaE + dy_nE_n*T_ne + dy_n_P*T_eta) /S_etae;

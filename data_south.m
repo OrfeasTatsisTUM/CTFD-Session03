@@ -74,7 +74,7 @@
             dy_nw_w  = y_w - y_nw;   dx_nw_w   = x_w - x_nw;
 
         % Areas
-            S_eta  = ((x_ne*y_e  - x_e*y_ne)  + (x_e*y_w   - x_w*y_e)   + (x_w*y_nw  - x_nw*y_w)  + (x_nw*y_ne - x_ne*y_nw))/2;
-            S_etae = ((x_nE*y_E  - x_E*y_nE)  + (x_E*y_P   - x_P*y_E)   + (x_P*y_n  - x_n*y_P)  + (x_n*y_nE - x_nE*y_n))/2;
-            S_n    = ((x_Ne*y_e  - x_e*y_Ne)  + (x_e*y_w   - x_w*y_e)   + (x_w*y_Nw  - x_Nw*y_w)  + (x_Nw*y_Ne - x_Ne*y_Nw))/2;
-            S_etaw = ((x_n*y_P  - x_P*y_n)  + (x_P*y_W   - x_W*y_P)   + (x_W*y_nW  - x_nW*y_W)  + (x_nW*y_n - x_n*y_nW))/2;
+            S_eta  = abs((x_ne*y_e  - x_e*y_ne)  + (x_e*y_w   - x_w*y_e)   + (x_w*y_nw  - x_nw*y_w)  + (x_nw*y_ne - x_ne*y_nw))/2;
+            S_etae = abs((x_nE*y_E  - x_E*y_nE)  + (x_E*y_P   - x_P*y_E)   + (x_P*y_n  - x_n*y_P)  + (x_n*y_nE - x_nE*y_n))/2;
+            S_n    = abs((x_Ne*y_e  - x_e*y_Ne)  + (x_e*y_w   - x_w*y_e)   + (x_w*y_Nw  - x_Nw*y_w)  + (x_Nw*y_Ne - x_Ne*y_Nw))/2;
+            S_etaw = abs((x_n*y_P  - x_P*y_n)  + (x_P*y_W   - x_W*y_P)   + (x_W*y_nW  - x_nW*y_W)  + (x_nW*y_n - x_n*y_nW))/2;

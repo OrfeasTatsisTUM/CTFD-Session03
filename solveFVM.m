@@ -7,12 +7,12 @@ function T = solveFVM(dimY, dimX, X, Y, boundary, TD, lamda, alpha, Tinf)
 % This routine set up the linear system and solve it
 %
 % input
-% M         Spatial Matrix M
+% T         Spatial Matrix T
 % X         Matrix x coordinates 
 % Y         Matrix y coordinates
 % boundary  String vector. Boundary types.
 % TD        Temperature for each boundary (if Dirichlet)
-% alpha     convective heat transfer coefficient
+% alpha     Convective heat transfer coefficient
 % Tinf      Temperature of the surrouding fluid 
 %
 % output

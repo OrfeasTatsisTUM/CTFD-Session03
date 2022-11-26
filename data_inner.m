@@ -70,7 +70,7 @@
         % Around e
         dy_s_sE  = y_sE - y_s;    dx_s_sE  = x_sE - x_s;
         dy_sE_nE = y_nE - y_sE;   dx_sE_nE = x_nE - x_sE;
-        dy_nE_n  = y_n - y_nE;    dx_nE_n  = x_n - x_nW; 
+        dy_nE_n  = y_n - y_nE;    dx_nE_n  = x_n - x_nE; 
         dy_n_s   = y_s - y_n;     dx_n_s   = x_s - x_n;
 
         % Around n        

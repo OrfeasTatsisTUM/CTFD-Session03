@@ -54,13 +54,15 @@ switch shape
         d2 = 4;
         
         formfunction = @(xnorm) (1-xnorm)*h1/2 + xnorm*h2/2+ (sin(2*pi*d1*xnorm)).*(1-(1-1/d2)*xnorm);
-  
-    % Add other cases of form function
+
+    otherwise
+        error(false, 'false shape specified: %s', shape);
+    
 end
 
 %% Parameter for Conjugated Heat Transfer (For Session 04)
 alpha = 5;
-Tinf = 90;
+Tinf = 0;
 
 %% Boundary conditions (Only Dirichlet applied in Session 03) 
 % Type: 1) Dirichlet    2) Neumann    3) Robin
@@ -108,6 +110,9 @@ switch heat_conduc
         for i=1:dimX
             lamda(1:dimY,i) = minlamda + dlamda * (i-1)*l/(dimX-1);
         end
+        
+    otherwise
+        error(false, 'false lamda type specified: %s', heat_conduc);
         
 end
 clear minlamda maxlamda deltalamda dlamda

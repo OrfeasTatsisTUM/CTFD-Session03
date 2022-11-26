@@ -66,16 +66,16 @@ T_ne=(T_NE+T_N+T_P+T_E)/4;
 T_nw=(T_NW+T_N+T_P+T_W)/4;
 
 % Gradients (Greens theorem) (3.21 -2.26)
-dTdx_s=  (dy_Sw_Se*T_S + dy_Se_e*T_se + dy_e_w*T_P + dy_w_Sw*T_sw) /S_s;
+dTdx_s=   (dy_Sw_Se*T_S + dy_Se_e*T_se + dy_e_w*T_P + dy_w_Sw*T_sw) /S_s;
 dTdy_s=  -(dx_Sw_Se*T_S + dx_Se_e*T_se + dx_e_w*T_P + dx_w_Sw*T_sw) /S_s;
 
-dTdx_e=  (dy_s_sE*T_se + dy_sE_nE*T_E + dy_nE_n*T_ne + dy_n_s*T_P) /S_e;
+dTdx_e=   (dy_s_sE*T_se + dy_sE_nE*T_E + dy_nE_n*T_ne + dy_n_s*T_P) /S_e;
 dTdy_e=  -(dx_s_sE*T_se + dx_sE_nE*T_E + dx_nE_n*T_ne + dx_n_s*T_P) /S_e;
 
-dTdx_n=  (dy_w_e*T_P + dy_e_Ne*T_ne + dy_Ne_Nw*T_N + dy_Nw_w*T_nw) /S_n;
+dTdx_n=   (dy_w_e*T_P + dy_e_Ne*T_ne + dy_Ne_Nw*T_N + dy_Nw_w*T_nw) /S_n;
 dTdy_n=  -(dx_w_e*T_P + dx_e_Ne*T_ne + dx_Ne_Nw*T_N + dx_Nw_w*T_nw) /S_n;
 
-dTdx_w=  (dy_sW_s*T_sw + dy_s_n*T_P + dy_n_nW*T_nw + dy_nW_sW*T_W) /S_w;
+dTdx_w=   (dy_sW_s*T_sw + dy_s_n*T_P + dy_n_nW*T_nw + dy_nW_sW*T_W) /S_w;
 dTdy_w=  -(dx_sW_s*T_sw + dx_s_n*T_P + dx_n_nW*T_nw + dx_nW_sW*T_W) /S_w;
 
 

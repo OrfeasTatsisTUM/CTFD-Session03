@@ -77,6 +77,8 @@
             dy_nw_sw = y_sw - y_nw; dx_nw_sw = x_sw - x_nw;
             dy_n_nw  = y_nw - y_n;  dx_n_nw  = x_nw - x_n;
 
+            dl_s_n = norm([dx_s_n; dy_s_n]);
+
         % Areas
             S_omega  = abs((x_s*y_sw  - x_sw*y_s)  + (x_sw*y_nw   - x_nw*y_sw)   + (x_nw*y_n  - x_n*y_nw)  + (x_n*y_s - x_s*y_n))/2;
             S_nomega = abs((x_P*y_w  - x_w*y_P)  + (x_w*y_Nw   - x_Nw*y_w)   + (x_Nw*y_N  - x_N*y_Nw)  + (x_N*y_P - x_P*y_N))/2;

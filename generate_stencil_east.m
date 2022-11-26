@@ -41,7 +41,7 @@ syms dx_Nw_w dx_w_P dx_P_N dx_N_Nw real
 
 % Around P
 syms dx_s_n dx_sw_s dx_nw_sw dx_n_nw real
-syms dy_s_n dy_sw_s dy_nw_sw dy_n_nw real
+syms dy_s_n dy_sw_s dy_nw_sw dy_n_nw dl_s_n real
 
 % Areas
 syms S_somega S_nomega S_omega S_w real
@@ -82,7 +82,7 @@ dTdy_nomega =   (dx_Nw_w*T_nw + dx_w_P*T_omega + dx_P_N*T_n + dx_N_Nw*T_Nomega) 
 
 % Build whole stecil acounting for quadratic lamda like in Helmholtz (A.14)
 
- DDT= (-bc_ctrl*(dy_s_n-dx_s_n)*alpha/lamda*(T_P-Tinf)...
+ DDT= (-bc_ctrl*dl_s_n*alpha/lamda*(T_P-Tinf)...
      + dy_sw_s*dTdx_somega - dx_sw_s*dTdy_somega...
      + dy_nw_sw*dTdx_w   - dx_nw_sw*dTdy_w...
      + dy_n_nw*dTdx_nomega - dx_n_nw*dTdy_nomega ) /S_omega;
